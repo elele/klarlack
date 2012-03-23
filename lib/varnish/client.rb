@@ -142,11 +142,11 @@ module Varnish
     #   #=> [[1, "req.url ~ .*"]]
     #
     def purge(*args)
-      c = 'purge'
+      c = 'ban'
       c << ".#{args.shift}" if [:url, :hash, :list].include?(args.first)
       response = cmd(c, *args)
       case c
-      when 'purge.list'
+      when 'ban.list'
         response.split("\n").map do |line|
           a = line.split("\t")
           [a[0].to_i, a[1]]
